@@ -43,7 +43,7 @@ for sample in samples
 	for t in time_samples 
 		# Unitary evolution 
 		forward_state = dot(exp(i*eigenvalues*t) , init_amplitudes)
-		corr_data=compute_correlations(forward_state)
+		corr_data=compute_correlations(forward_state) # this is where the money is
 		save (forward_state,corr_data) #the nice thing about unitary evolution of pure states is we just need to save the amplitudes, not a full density matrix
 		# It might be worth saving less frequently if it is possible to store all the data for a few samples in RAM before writing to disk
 ```
@@ -68,8 +68,15 @@ The key resources of concern are:
 Here are some concrete tasks to work on. Some of them are interdependent, but you could easily parallelize them if you have the time.
 
 * Get familiar with computational many-body physics by playing with the codebases I've supplied. Keep the system sizes small at first to avoid blowing out the run-time. Estimate and measure the memory, disk, and runtime scaling of these programs.
-* Using what you've learened from point 1, estimate the resource requirements for the objective calculations in momentum space. Consider varying the program structure, comparing the resources and *human effort* needed for different versions.
-* Build some components of the code. For example, generate some arbitrary lattice states (using the existing Bose-Hubbard code) and write code to compute correlation functions. Write the time-evolution component, including the checkpoints. Build the position-momentum coordinate transformation and/or generate the Aubry-Andre Hamiltonian directly in the momentum basis.
+* Build some components of the code. For example:
+  * Generate some lattice states (using the existing Bose-Hubbard code) and write code to compute correlation functions for the site occupation, checking the results carefully in some known cases (like the Mott insulator, or an alternating lattice). 
+  * Simulate unitary time evolution given an initial state. Look at evolution of expectation values and correlation functions. 
+
+## Open problems
+
+It appears that the program outlined above, largely as-is, would be sufficient for generating the data we need. Given the basis (occupation numbers) and the full set of amplitudes of these basis vectors, we have the full information about the quantum state at whatever values of time we want. So this component is essentially a matter of stapling together code that exists with some minimal extensions. Great! So give this a go, as discussed above. This is also nice because the data contains complete information and we can get it running quite quickly.
+
+The remaining problem is how to transform this data into the relevant experimental outcomes. In the context of an experimental realization, what would be done is the generation of a lattice state, followed by unitary time evolution and then *turning off the lattice* and allowing the atoms to free-fall after projection into free particle momentum eigenstates. These non-interacting, single-particle states are ultimately what is measured, giving occupation numbers, and from which correlation functions are actually computed. The question is: How do we compute these from the representation we have? I don't know. Danny has some ideas - this is the major research component of this project. 
 
 ## Feedback
 
