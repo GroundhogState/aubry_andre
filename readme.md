@@ -1,6 +1,6 @@
 # Exploring the many-body localization transition in momentum space
 
-The emergence of thermodynamics from quantum mechanics is a foundational in physics.
+The emergence of thermodynamics from quantum mechanics is a foundational matter in physics.
 Namely, how can one reconcile the information-preserving unitary evolution of quantum states with the second law of thermodynamics? Many-body localizing systems are examples of systems whose time evolution is asymptotically athermal - local correlations indefinitely retain information about their initial conditions, as opposed to tending towards a thermal distribution. 
 
 Experiments in ultracold atoms using quantum gas microscopes have begun to realize and explore properties of many-body localized systems. The recent emergence of new momentum detection modalities provide a way forward to investigate currents and dynamical correlations in these fascinating systems. State of the art machines are able to create and control quantum systems of a dozen atoms in a quasirandom lattice and obtain single-site population measurements. 
